@@ -1,14 +1,13 @@
-import pytest
 from page.google_homepage import GoogleHomePage
-from action.search_actions import perform_search
 
 
-def test_open_google(driver):
+def test_open_google(driver, search_data):
     page = GoogleHomePage(driver)
     page.load()
-    assert "Google" in driver.title
+    assert search_data["open_google"] in driver.title
 
 
-def test_search_query(driver):
-    perform_search(driver, "Selenium Python")
-    assert "Selenium Python" in driver.title
+def test_search_query(driver, search_data):
+    page = GoogleHomePage(driver)
+    page.open_and_search(search_data["search_query"])
+    assert search_data["search_query"] in driver.title
