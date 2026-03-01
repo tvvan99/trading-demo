@@ -18,6 +18,7 @@ class _OrderForm(BasePage):
         field = self.wait_for_element_clickable(TradeLocators.VOLUME_INPUT)
         field.click()
         field.clear()
+        sleep(3)  # Temporary flaky fix
         field.send_keys(value)
 
     def get_volume_value(self) -> str:
@@ -92,7 +93,6 @@ class TradePage(BasePage):
         field.click()
         field.clear()
         field.send_keys(value)
-        sleep(5)
 
     def get_stoploss_value(self) -> str:
         return self.wait_for_element(TradeLocators.STOPLOSS_INPUT).get_attribute("value")
