@@ -416,3 +416,12 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Python and automation project ignores
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+pytest_cache/
+
