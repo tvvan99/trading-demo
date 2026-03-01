@@ -1,3 +1,7 @@
 {
-    "stoploss": "100"
+    "stoploss": "100",
+    "takeprofit": "200",
+    "volume": "1",
+    "limit_price": "1.17500",
+    "stop_price": "1.16500"
 }

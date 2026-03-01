@@ -15,6 +15,9 @@ class _OrderForm(BasePage):
         field.clear()
         field.send_keys(value)
 
+    def get_volume_value(self) -> str:
+        return self.wait_for_element(TradeLocators.VOLUME_INPUT).get_attribute("value")
+
     def swap_to_units(self):
         self.wait_for_element_clickable(TradeLocators.SWAP_TO_UNITS_BUTTON).click()
 
@@ -35,6 +38,14 @@ class MarketOrderForm(_OrderForm):
 
 
 class LimitOrderForm(_OrderForm):
+    def enter_price(self, value: str):
+        field = self.wait_for_element(TradeLocators.LIMIT_STOP_PRICE_INPUT)
+        field.clear()
+        field.send_keys(value)
+
+    def get_price_value(self) -> str:
+        return self.wait_for_element(TradeLocators.LIMIT_STOP_PRICE_INPUT).get_attribute("value")
+
     def select_fill_policy(self):
         self._select_fill_policy("Return")
 
