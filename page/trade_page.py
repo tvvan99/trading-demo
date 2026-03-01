@@ -15,7 +15,8 @@ class _OrderForm(BasePage):
     """Shared volume / fill-policy behaviour for all order type forms."""
 
     def enter_volume(self, value: str):
-        field = self.wait_for_element(TradeLocators.VOLUME_INPUT)
+        field = self.wait_for_element_clickable(TradeLocators.VOLUME_INPUT)
+        field.click()
         field.clear()
         field.send_keys(value)
 
@@ -45,7 +46,8 @@ class MarketOrderForm(_OrderForm):
 
 class LimitOrderForm(_OrderForm):
     def enter_price(self, value: str):
-        field = self.wait_for_element(TradeLocators.LIMIT_STOP_PRICE_INPUT)
+        field = self.wait_for_element_clickable(TradeLocators.LIMIT_STOP_PRICE_INPUT)
+        field.click()
         field.clear()
         field.send_keys(value)
 
@@ -86,7 +88,8 @@ class TradePage(BasePage):
 
     # --- Stop Loss ---
     def enter_stoploss(self, value: str):
-        field = self.wait_for_element(TradeLocators.STOPLOSS_INPUT)
+        field = self.wait_for_element_clickable(TradeLocators.STOPLOSS_INPUT)
+        field.click()
         field.clear()
         field.send_keys(value)
         sleep(5)
@@ -96,7 +99,8 @@ class TradePage(BasePage):
 
     # --- Take Profit ---
     def enter_takeprofit(self, value: str):
-        field = self.wait_for_element(TradeLocators.TAKEPROFIT_INPUT)
+        field = self.wait_for_element_clickable(TradeLocators.TAKEPROFIT_INPUT)
+        field.click()
         field.clear()
         field.send_keys(value)
 

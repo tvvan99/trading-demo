@@ -24,6 +24,11 @@ class BasePage:
             EC.url_contains(text)
         )
 
+    def wait_for_page_load(self, timeout: int = WAIT_TIMEOUT):
+        WebDriverWait(self.driver, timeout).until(
+            lambda d: d.execute_script("return document.readyState") == "complete"
+        )
+
     def js_click(self, locator: tuple, timeout: int = WAIT_TIMEOUT):
         element = self.wait_for_element_clickable(locator, timeout)
         self.driver.execute_script("arguments[0].click();", element)

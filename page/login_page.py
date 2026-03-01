@@ -16,3 +16,4 @@ class LoginPage(BasePage):
         self.wait_for_element(LoginLocators.PASSWORD_INPUT).send_keys(password)
         self.wait_for_element_clickable(LoginLocators.LOGIN_BUTTON).click()
         self.wait_for_url_contains("trade")
+        self.wait_for_page_load()

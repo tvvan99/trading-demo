@@ -1,4 +1,5 @@
 from page.trade_page import TradePage
+from utils.assertions import feq
 
 
 def test_market_order(logged_in_driver, trade_data):
@@ -10,9 +11,9 @@ def test_market_order(logged_in_driver, trade_data):
     page.enter_stoploss(trade_data["stoploss"])
     page.enter_takeprofit(trade_data["takeprofit"])
 
-    assert form.get_volume_value() == trade_data["volume"]
-    assert page.get_stoploss_value() == trade_data["stoploss"]
-    assert page.get_takeprofit_value() == trade_data["takeprofit"]
+    assert feq(form.get_volume_value(), trade_data["volume"])
+    assert feq(page.get_stoploss_value(), trade_data["stoploss"])
+    assert feq(page.get_takeprofit_value(), trade_data["takeprofit"])
 
     page.click_open_trade()
 
@@ -27,10 +28,10 @@ def test_limit_order(logged_in_driver, trade_data):
     page.enter_stoploss(trade_data["stoploss"])
     page.enter_takeprofit(trade_data["takeprofit"])
 
-    assert form.get_price_value() == trade_data["limit_price"]
-    assert form.get_volume_value() == trade_data["volume"]
-    assert page.get_stoploss_value() == trade_data["stoploss"]
-    assert page.get_takeprofit_value() == trade_data["takeprofit"]
+    assert feq(form.get_price_value(), trade_data["limit_price"])
+    assert feq(form.get_volume_value(), trade_data["volume"])
+    assert feq(page.get_stoploss_value(), trade_data["stoploss"])
+    assert feq(page.get_takeprofit_value(), trade_data["takeprofit"])
 
     page.click_open_trade()
 
@@ -45,10 +46,10 @@ def test_stop_order(logged_in_driver, trade_data):
     page.enter_stoploss(trade_data["stoploss"])
     page.enter_takeprofit(trade_data["takeprofit"])
 
-    assert form.get_price_value() == trade_data["stop_price"]
-    assert form.get_volume_value() == trade_data["volume"]
-    assert page.get_stoploss_value() == trade_data["stoploss"]
-    assert page.get_takeprofit_value() == trade_data["takeprofit"]
+    assert feq(form.get_price_value(), trade_data["stop_price"])
+    assert feq(form.get_volume_value(), trade_data["volume"])
+    assert feq(page.get_stoploss_value(), trade_data["stoploss"])
+    assert feq(page.get_takeprofit_value(), trade_data["takeprofit"])
 
     page.click_open_trade()
 
