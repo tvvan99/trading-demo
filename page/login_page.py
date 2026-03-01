@@ -14,7 +14,5 @@ class LoginPage(BasePage):
     def login(self, username: str = LOGIN_USERNAME, password: str = LOGIN_PASSWORD):
         self.wait_for_element(LoginLocators.USERNAME_INPUT).send_keys(username)
         self.wait_for_element(LoginLocators.PASSWORD_INPUT).send_keys(password)
-        sleep(2)
         self.wait_for_element_clickable(LoginLocators.LOGIN_BUTTON).click()
-        sleep(6)
         self.wait_for_url_contains("trade")
