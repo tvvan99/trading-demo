@@ -1,9 +1,10 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 from locators.google_locators import GoogleLocators
+from config.settings import BASE_URL
 
 
 class GoogleHomePage:
-    URL = "https://www.google.com"
+    URL = BASE_URL
     SEARCH_BOX = GoogleLocators.SEARCH_BOX
 
     def __init__(self, driver: WebDriver):

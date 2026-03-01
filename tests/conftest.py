@@ -10,7 +10,7 @@ from env.driver import create_driver
 
 @pytest.fixture(scope="session")
 def driver():
-    drv = create_driver(headless=False)
+    drv = create_driver()
     yield drv
     drv.quit()
 
