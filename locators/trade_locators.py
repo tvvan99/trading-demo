@@ -6,11 +6,6 @@ class TradeLocators:
     # Order Type dropdown
     ORDER_TYPE_DROPDOWN = (By.CSS_SELECTOR, '[data-testid="trade-dropdown-order-type"]')
 
-    # Order Type options (by visible text inside dropdown)
-    ORDER_TYPE_MARKET     = (By.XPATH, '//*[@data-testid="trade-dropdown-order-type"]//following-sibling::*[contains(text(),"Market")]')
-    ORDER_TYPE_LIMIT      = (By.XPATH, '//*[@data-testid="trade-dropdown-order-type"]//following-sibling::*[contains(text(),"Limit")]')
-    ORDER_TYPE_STOP       = (By.XPATH, '//*[@data-testid="trade-dropdown-order-type"]//following-sibling::*[contains(text(),"Stop")]')
-
     # Volume / Units (shared across Market, Limit, Stop)
     VOLUME_INPUT          = (By.CSS_SELECTOR, '[data-testid="trade-input-volume"]')
     SWAP_TO_UNITS_BUTTON  = (By.CSS_SELECTOR, '[data-testid="trade-swap-to-units"]')
@@ -28,3 +23,6 @@ class TradeLocators:
 
     # Take Profit (common across all order types)
     TAKEPROFIT_INPUT      = (By.CSS_SELECTOR, '[data-testid="trade-input-takeprofit-price"]')
+
+    # Open Trade button
+    OPEN_TRADE_BUTTON     = (By.CSS_SELECTOR, '[data-testid="trade-button-order"]')

@@ -1,7 +1,13 @@
 {
-    "stoploss": "100",
-    "takeprofit": "200",
+    "order_type_limit": "Limit",
+    "order_type_stop": "Stop",
+
+    "fill_policy_market": "Fill or Kill",
+    "fill_policy_limit_stop": "Return",
+
     "volume": "1",
     "limit_price": "1.17500",
-    "stop_price": "1.16500"
+    "stop_price": "1.16500",
+    "stoploss": "100",
+    "takeprofit": "200"
 }

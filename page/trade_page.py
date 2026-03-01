@@ -1,10 +1,14 @@
+import logging
+
 from selenium.webdriver.common.by import By
 
 from locators.trade_locators import TradeLocators
-from config.settings import BASE_URL
+from config.settings import BASE_URL, DEFAULT_ORDER_TYPE
 from page.base_page import BasePage
 
 from time import sleep
+
+logger = logging.getLogger(__name__)
 
 
 class _OrderForm(BasePage):
@@ -21,7 +25,9 @@ class _OrderForm(BasePage):
     def swap_to_units(self):
         self.wait_for_element_clickable(TradeLocators.SWAP_TO_UNITS_BUTTON).click()
 
-    def _select_fill_policy(self, value: str):
+    def _select_fill_policy(self, value: str = None):
+        if not value:
+            return
         self.wait_for_element_clickable(TradeLocators.FILL_POLICY_DROPDOWN).click()
         self.wait_for_element_clickable(
             (By.XPATH, f'//*[normalize-space(text())="{value}"]')
@@ -46,8 +52,8 @@ class LimitOrderForm(_OrderForm):
     def get_price_value(self) -> str:
         return self.wait_for_element(TradeLocators.LIMIT_STOP_PRICE_INPUT).get_attribute("value")
 
-    def select_fill_policy(self):
-        self._select_fill_policy("Return")
+    def select_fill_policy(self, value: str):
+        self._select_fill_policy(value)
 
 
 class StopOrderForm(LimitOrderForm):
@@ -67,7 +73,7 @@ class TradePage(BasePage):
     def load(self):
         self.driver.get(self.URL)
 
-    def select_order_type(self, order_type: str) -> _OrderForm:
+    def select_order_type(self, order_type: str = DEFAULT_ORDER_TYPE) -> _OrderForm:
         """Open the Order Type dropdown, select an option, and return the matching form object.
 
         Supported values: "Market", "Limit", "Stop"
@@ -96,3 +102,11 @@ class TradePage(BasePage):
 
     def get_takeprofit_value(self) -> str:
         return self.wait_for_element(TradeLocators.TAKEPROFIT_INPUT).get_attribute("value")
+
+    # --- Open Trade button ---
+    def click_open_trade(self):
+        button = self.wait_for_element(TradeLocators.OPEN_TRADE_BUTTON)
+        if button.text.strip() == "Market Closed":
+            logger.warning("Open trade button is disabled: Market Closed")
+            return
+        button.click()
