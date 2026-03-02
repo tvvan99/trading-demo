@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(python -m pytest --collect-only tests/test_trade_input.py)"
-    ]
-  }
-}
