@@ -424,4 +424,7 @@ __pycache__/
 venv/
 .env
 pytest_cache/
+.pytest_cache/
+.claude/
+
 

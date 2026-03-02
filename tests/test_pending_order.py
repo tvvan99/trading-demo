@@ -10,6 +10,6 @@ def test_edit_pending_order(logged_in_driver, trade_data):
     form.enter_expiry_date(trade_data["edit_expiry_date"])
     form.enter_expiry_time(trade_data["edit_expiry_time"])
     form.select_fill_policy(trade_data["fill_policy_limit_stop"])
-    page.enter_stoploss_points(trade_data["edit_stoploss_points"])
-    page.enter_takeprofit_points(trade_data["edit_takeprofit_points"])
+    form.enter_stoploss_points(trade_data["edit_stoploss_points"])
+    form.enter_takeprofit_points(trade_data["edit_takeprofit_points"])
     print(1)

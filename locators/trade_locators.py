@@ -43,6 +43,16 @@ class TradeLocators:
     # Pending orders tab
     PENDING_ORDERS_TAB = (By.CSS_SELECTOR, '[data-testid="tab-asset-order-type-pending-orders"]')
 
+    # Edit modal overlay — scoped locators to prevent interception by overlay-aqx-trader
+    EDIT_OVERLAY                  = (By.ID, "overlay-aqx-trader")
+    EDIT_PRICE_INPUT              = (By.CSS_SELECTOR, '#overlay-aqx-trader input[name="price"]')
+    EDIT_EXPIRY_DROPDOWN          = (By.CSS_SELECTOR, '#overlay-aqx-trader [data-testid="trade-dropdown-expiry"]')
+    EDIT_EXPIRY_DATE_INPUT        = (By.CSS_SELECTOR, '#overlay-aqx-trader [data-testid="trade-input-expiry-date"]')
+    EDIT_EXPIRY_TIME_INPUT        = (By.CSS_SELECTOR, '#overlay-aqx-trader [data-testid="trade-input-expiry-time"]')
+    EDIT_FILL_POLICY_DROPDOWN     = (By.CSS_SELECTOR, '#overlay-aqx-trader [data-testid="trade-dropdown-fill-policy"]')
+    EDIT_STOPLOSS_POINTS_INPUT    = (By.CSS_SELECTOR, '#overlay-aqx-trader [data-testid="trade-input-stoploss-points"]')
+    EDIT_TAKEPROFIT_POINTS_INPUT  = (By.CSS_SELECTOR, '#overlay-aqx-trader [data-testid="trade-input-takeprofit-points"]')
+
     # Stop Loss (common across all order types)
     STOPLOSS_INPUT        = (By.CSS_SELECTOR, '[data-testid="trade-input-stoploss-price"]')
     STOPLOSS_POINTS_INPUT = (By.CSS_SELECTOR, '[data-testid="trade-input-stoploss-points"]')

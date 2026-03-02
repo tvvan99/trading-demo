@@ -120,6 +120,69 @@ class StopOrderForm(LimitOrderForm):
     pass
 
 
+class EditLimitOrderForm(LimitOrderForm):
+    """LimitOrderForm with all locators scoped to #overlay-aqx-trader to avoid click interception."""
+
+    def enter_price(self, value: str):
+        field = self.wait_for_element_clickable(TradeLocators.EDIT_PRICE_INPUT)
+        field.click()
+        field.clear()
+        field.send_keys(value)
+
+    def get_price_value(self) -> str:
+        return self.wait_for_element(TradeLocators.EDIT_PRICE_INPUT).get_attribute("value")
+
+    def select_expiry(self, value: str = None):
+        if not value:
+            return
+        self.wait_for_element_clickable(TradeLocators.EDIT_EXPIRY_DROPDOWN).click()
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//*[normalize-space(text())="{value}"]')
+        ).click()
+
+    def enter_expiry_date(self, value: str):
+        target = datetime.strptime(value, "%Y-%m-%d")
+        self.wait_for_element_clickable(TradeLocators.EDIT_EXPIRY_DATE_INPUT).click()
+        self._navigate_calendar_to(target)
+        aria_label = f"{target.strftime('%B')} {target.day}, {target.year}"
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//abbr[@aria-label="{aria_label}"]')
+        ).click()
+
+    def enter_expiry_time(self, value: str):
+        hour, minute = value.split(":")
+        self.wait_for_element_clickable(TradeLocators.EDIT_EXPIRY_TIME_INPUT).click()
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_TIME_HOUR_TRIGGER).click()
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//div[@data-testid="options"]//div[normalize-space(text())="{hour}"]')
+        ).click()
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_TIME_MINUTE_TRIGGER).click()
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//div[@data-testid="options"]//div[normalize-space(text())="{minute}"]')
+        ).click()
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_TIME_OK).click()
+
+    def _select_fill_policy(self, value: str = None):
+        if not value:
+            return
+        self.wait_for_element_clickable(TradeLocators.EDIT_FILL_POLICY_DROPDOWN).click()
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//*[normalize-space(text())="{value}"]')
+        ).click()
+
+    def enter_stoploss_points(self, value: str):
+        field = self.wait_for_element_clickable(TradeLocators.EDIT_STOPLOSS_POINTS_INPUT)
+        field.click()
+        field.clear()
+        field.send_keys(value)
+
+    def enter_takeprofit_points(self, value: str):
+        field = self.wait_for_element_clickable(TradeLocators.EDIT_TAKEPROFIT_POINTS_INPUT)
+        field.click()
+        field.clear()
+        field.send_keys(value)
+
+
 _BULK_CLOSE_CONFIRM = {
     "All Positions":        TradeLocators.BULK_CLOSE_CONFIRM_ALL,
     "Profitable Positions": TradeLocators.BULK_CLOSE_CONFIRM_PROFIT,
@@ -203,13 +266,13 @@ class TradePage(BasePage):
             (By.CSS_SELECTOR, '[data-testid="asset-pending-column-order-id"]')
         ).text.strip()
 
-    def edit_pending_order(self, order_id: str) -> LimitOrderForm:
+    def edit_pending_order(self, order_id: str) -> EditLimitOrderForm:
         self.wait_for_element_clickable((By.XPATH,
             f'//*[@data-testid="asset-pending-column-order-id" and normalize-space(text())="{order_id}"]'
             f'/ancestor::*[.//*[@data-testid="asset-open-button-edit"]][1]'
             f'//*[@data-testid="asset-open-button-edit"]'
         )).click()
-        return LimitOrderForm(self.driver)
+        return EditLimitOrderForm(self.driver)
 
     # --- Open Trade button ---
     def click_open_trade(self):
