@@ -5,6 +5,11 @@
     "fill_policy_market": "Fill or Kill",
     "fill_policy_limit_stop": "Return",
 
+    "expiry_good_till_canceled": "Good Till Canceled",
+    "expiry_good_till_day": "Good Till Day",
+    "expiry_specified_date": "Specified Date",
+    "expiry_specified_date_and_time": "Specified Date and Time",
+
     "volume": "1",
     "limit_price": "1.17500",
     "stop_price": "1.16500",

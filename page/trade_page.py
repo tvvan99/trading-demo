@@ -55,6 +55,14 @@ class LimitOrderForm(_OrderForm):
     def get_price_value(self) -> str:
         return self.wait_for_element(TradeLocators.LIMIT_STOP_PRICE_INPUT).get_attribute("value")
 
+    def select_expiry(self, value: str = None):
+        if not value:
+            return
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_DROPDOWN).click()
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//*[normalize-space(text())="{value}"]')
+        ).click()
+
     def select_fill_policy(self, value: str):
         self._select_fill_policy(value)
 
