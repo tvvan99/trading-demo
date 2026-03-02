@@ -24,9 +24,15 @@ class TradeLocators:
 
     # Stop Loss (common across all order types)
     STOPLOSS_INPUT        = (By.CSS_SELECTOR, '[data-testid="trade-input-stoploss-price"]')
+    STOPLOSS_POINTS_INPUT = (By.CSS_SELECTOR, '[data-testid="trade-input-stoploss-points"]')
 
     # Take Profit (common across all order types)
-    TAKEPROFIT_INPUT      = (By.CSS_SELECTOR, '[data-testid="trade-input-takeprofit-price"]')
+    TAKEPROFIT_INPUT        = (By.CSS_SELECTOR, '[data-testid="trade-input-takeprofit-price"]')
+    TAKEPROFIT_POINTS_INPUT = (By.CSS_SELECTOR, '[data-testid="trade-input-takeprofit-points"]')
 
     # Open Trade button
     OPEN_TRADE_BUTTON     = (By.CSS_SELECTOR, '[data-testid="trade-button-order"]')
+
+    # Trade confirmation dialog
+    CONFIRM_BUTTON        = (By.CSS_SELECTOR, '[data-testid="trade-confirmation-button-confirm"]')
+    CANCEL_BUTTON         = (By.CSS_SELECTOR, '[data-testid="trade-confirmation-button-close"]')

@@ -8,14 +8,15 @@ def test_market_order(logged_in_driver, trade_data):
 
     form.enter_volume(trade_data["volume"])
     form.select_fill_policy(trade_data["fill_policy_market"])
-    page.enter_stoploss(trade_data["stoploss"])
-    page.enter_takeprofit(trade_data["takeprofit"])
+    page.enter_stoploss_points(trade_data["stoploss_points"])
+    page.enter_takeprofit_points(trade_data["takeprofit_points"])
 
     assert feq(form.get_volume_value(), trade_data["volume"])
-    assert feq(page.get_stoploss_value(), trade_data["stoploss"])
-    assert feq(page.get_takeprofit_value(), trade_data["takeprofit"])
+    assert feq(page.get_stoploss_points_value(), trade_data["stoploss_points"])
+    assert feq(page.get_takeprofit_points_value(), trade_data["takeprofit_points"])
 
     page.click_open_trade()
+    page.confirm_trade()
 
 
 def test_limit_order(logged_in_driver, trade_data):
@@ -26,15 +27,16 @@ def test_limit_order(logged_in_driver, trade_data):
     form.enter_price(trade_data["limit_price"])
     form.select_expiry(trade_data["expiry_good_till_canceled"])
     form.select_fill_policy(trade_data["fill_policy_limit_stop"])
-    page.enter_stoploss(trade_data["stoploss"])
-    page.enter_takeprofit(trade_data["takeprofit"])
+    page.enter_stoploss_points(trade_data["stoploss_points"])
+    page.enter_takeprofit_points(trade_data["takeprofit_points"])
 
     assert feq(form.get_price_value(), trade_data["limit_price"])
     assert feq(form.get_volume_value(), trade_data["volume"])
-    assert feq(page.get_stoploss_value(), trade_data["stoploss"])
-    assert feq(page.get_takeprofit_value(), trade_data["takeprofit"])
+    assert feq(page.get_stoploss_points_value(), trade_data["stoploss_points"])
+    assert feq(page.get_takeprofit_points_value(), trade_data["takeprofit_points"])
 
     page.click_open_trade()
+    page.confirm_trade()
 
 
 def test_stop_order(logged_in_driver, trade_data):
@@ -45,14 +47,15 @@ def test_stop_order(logged_in_driver, trade_data):
     form.enter_price(trade_data["stop_price"])
     form.select_expiry(trade_data["expiry_good_till_day"])
     form.select_fill_policy(trade_data["fill_policy_limit_stop"])
-    page.enter_stoploss(trade_data["stoploss"])
-    page.enter_takeprofit(trade_data["takeprofit"])
+    page.enter_stoploss_points(trade_data["stoploss_points"])
+    page.enter_takeprofit_points(trade_data["takeprofit_points"])
 
     assert feq(form.get_price_value(), trade_data["stop_price"])
     assert feq(form.get_volume_value(), trade_data["volume"])
-    assert feq(page.get_stoploss_value(), trade_data["stoploss"])
-    assert feq(page.get_takeprofit_value(), trade_data["takeprofit"])
+    assert feq(page.get_stoploss_points_value(), trade_data["stoploss_points"])
+    assert feq(page.get_takeprofit_points_value(), trade_data["takeprofit_points"])
 
     page.click_open_trade()
+    page.confirm_trade()
 
 

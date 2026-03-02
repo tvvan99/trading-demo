@@ -105,6 +105,15 @@ class TradePage(BasePage):
     def get_stoploss_value(self) -> str:
         return self.wait_for_element(TradeLocators.STOPLOSS_INPUT).get_attribute("value")
 
+    def enter_stoploss_points(self, value: str):
+        field = self.wait_for_element_clickable(TradeLocators.STOPLOSS_POINTS_INPUT)
+        field.click()
+        field.clear()
+        field.send_keys(value)
+
+    def get_stoploss_points_value(self) -> str:
+        return self.wait_for_element(TradeLocators.STOPLOSS_POINTS_INPUT).get_attribute("value")
+
     # --- Take Profit ---
     def enter_takeprofit(self, value: str):
         field = self.wait_for_element_clickable(TradeLocators.TAKEPROFIT_INPUT)
@@ -115,6 +124,15 @@ class TradePage(BasePage):
     def get_takeprofit_value(self) -> str:
         return self.wait_for_element(TradeLocators.TAKEPROFIT_INPUT).get_attribute("value")
 
+    def enter_takeprofit_points(self, value: str):
+        field = self.wait_for_element_clickable(TradeLocators.TAKEPROFIT_POINTS_INPUT)
+        field.click()
+        field.clear()
+        field.send_keys(value)
+
+    def get_takeprofit_points_value(self) -> str:
+        return self.wait_for_element(TradeLocators.TAKEPROFIT_POINTS_INPUT).get_attribute("value")
+
     # --- Open Trade button ---
     def click_open_trade(self):
         button = self.wait_for_element(TradeLocators.OPEN_TRADE_BUTTON)
@@ -122,3 +140,10 @@ class TradePage(BasePage):
             logger.warning("Open trade button is disabled: Market Closed")
             return
         button.click()
+
+    # --- Trade confirmation dialog ---
+    def confirm_trade(self):
+        self.wait_for_element_clickable(TradeLocators.CONFIRM_BUTTON).click()
+
+    def cancel_trade(self):
+        self.wait_for_element_clickable(TradeLocators.CANCEL_BUTTON).click()
