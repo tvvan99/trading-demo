@@ -40,6 +40,9 @@ class TradeLocators:
     EXPIRY_TIME_OK             = (By.XPATH, '//button[normalize-space(text())="OK"]')
     EXPIRY_TIME_CLEAR          = (By.XPATH, '//button[normalize-space(text())="Clear"]')
 
+    # Pending orders tab
+    PENDING_ORDERS_TAB = (By.CSS_SELECTOR, '[data-testid="tab-asset-order-type-pending-orders"]')
+
     # Stop Loss (common across all order types)
     STOPLOSS_INPUT        = (By.CSS_SELECTOR, '[data-testid="trade-input-stoploss-price"]')
     STOPLOSS_POINTS_INPUT = (By.CSS_SELECTOR, '[data-testid="trade-input-stoploss-points"]')

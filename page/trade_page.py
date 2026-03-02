@@ -194,6 +194,23 @@ class TradePage(BasePage):
     def get_takeprofit_points_value(self) -> str:
         return self.wait_for_element(TradeLocators.TAKEPROFIT_POINTS_INPUT).get_attribute("value")
 
+    # --- Pending orders tab ---
+    def click_pending_orders_tab(self):
+        self.wait_for_element_clickable(TradeLocators.PENDING_ORDERS_TAB).click()
+
+    def get_latest_pending_order_id(self) -> str:
+        return self.wait_for_element(
+            (By.CSS_SELECTOR, '[data-testid="asset-pending-column-order-id"]')
+        ).text.strip()
+
+    def edit_pending_order(self, order_id: str) -> LimitOrderForm:
+        self.wait_for_element_clickable((By.XPATH,
+            f'//*[@data-testid="asset-pending-column-order-id" and normalize-space(text())="{order_id}"]'
+            f'/ancestor::*[.//*[@data-testid="asset-open-button-edit"]][1]'
+            f'//*[@data-testid="asset-open-button-edit"]'
+        )).click()
+        return LimitOrderForm(self.driver)
+
     # --- Open Trade button ---
     def click_open_trade(self):
         button = self.wait_for_element(TradeLocators.OPEN_TRADE_BUTTON)

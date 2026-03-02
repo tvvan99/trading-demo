@@ -17,5 +17,14 @@
     "limit_price": "1.17500",
     "stop_price": "1.16500",
     "stoploss_points": "100",
-    "takeprofit_points": "100"
+    "takeprofit_points": "100",
+
+    "order_id": "1214577",
+
+    "edit_volume": "2",
+    "edit_price": "1.16000",
+    "edit_expiry_date": "2026-04-15",
+    "edit_expiry_time": "10:30",
+    "edit_stoploss_points": "150",
+    "edit_takeprofit_points": "150"
 }
