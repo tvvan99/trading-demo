@@ -36,3 +36,18 @@ class TradeLocators:
     # Trade confirmation dialog
     CONFIRM_BUTTON        = (By.CSS_SELECTOR, '[data-testid="trade-confirmation-button-confirm"]')
     CANCEL_BUTTON         = (By.CSS_SELECTOR, '[data-testid="trade-confirmation-button-close"]')
+
+    # Bulk close dropdown
+    BULK_CLOSE_DROPDOWN = (By.CSS_SELECTOR, '[data-testid="bulk-close"]')
+
+    # Bulk close modals — All Positions
+    BULK_CLOSE_CONFIRM_ALL    = (By.CSS_SELECTOR, '[data-testid="bulk-close-modal-button-submit-all"]')
+    BULK_CLOSE_CANCEL_ALL     = (By.CSS_SELECTOR, '[data-testid="bulk-close-modal-button-cancel-all"]')
+
+    # Bulk close modals — Profitable Positions
+    BULK_CLOSE_CONFIRM_PROFIT = (By.CSS_SELECTOR, '[data-testid="bulk-close-modal-button-submit-profit"]')
+    BULK_CLOSE_CANCEL_PROFIT  = (By.CSS_SELECTOR, '[data-testid="bulk-close-modal-button-cancel-profit"]')
+
+    # Bulk close modals — Loss Positions
+    BULK_CLOSE_CONFIRM_LOSS   = (By.CSS_SELECTOR, '[data-testid="bulk-close-modal-button-submit-loss"]')
+    BULK_CLOSE_CANCEL_LOSS    = (By.CSS_SELECTOR, '[data-testid="bulk-close-modal-button-cancel-loss"]')

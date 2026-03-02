@@ -71,6 +71,18 @@ class StopOrderForm(LimitOrderForm):
     pass
 
 
+_BULK_CLOSE_CONFIRM = {
+    "All Positions":        TradeLocators.BULK_CLOSE_CONFIRM_ALL,
+    "Profitable Positions": TradeLocators.BULK_CLOSE_CONFIRM_PROFIT,
+    "Loss Positions":       TradeLocators.BULK_CLOSE_CONFIRM_LOSS,
+}
+
+_BULK_CLOSE_CANCEL = {
+    "All Positions":        TradeLocators.BULK_CLOSE_CANCEL_ALL,
+    "Profitable Positions": TradeLocators.BULK_CLOSE_CANCEL_PROFIT,
+    "Loss Positions":       TradeLocators.BULK_CLOSE_CANCEL_LOSS,
+}
+
 _ORDER_TYPE_FORMS = {
     "Market": MarketOrderForm,
     "Limit":  LimitOrderForm,
@@ -143,7 +155,28 @@ class TradePage(BasePage):
 
     # --- Trade confirmation dialog ---
     def confirm_trade(self):
+        sleep(2) # Temporary flaky fix
         self.wait_for_element_clickable(TradeLocators.CONFIRM_BUTTON).click()
 
     def cancel_trade(self):
+        sleep(2) # Temporary flaky fix
         self.wait_for_element_clickable(TradeLocators.CANCEL_BUTTON).click()
+
+    # --- Bulk close ---
+    def bulk_close_select_option(self, option: str):
+        """Open the bulk-close dropdown and select an option.
+
+        option: "All Positions", "Profitable Positions", or "Loss Positions"
+        """
+        self.wait_for_element_clickable(TradeLocators.BULK_CLOSE_DROPDOWN).click()
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//*[normalize-space(text())="{option}"]')
+        ).click()
+
+    def bulk_close_confirm(self, option: str):
+        sleep(2) # Temporary flaky fix
+        self.wait_for_element_clickable(_BULK_CLOSE_CONFIRM[option]).click()
+
+    def bulk_close_cancel(self, option: str):
+        sleep(2) # Temporary flaky fix
+        self.wait_for_element_clickable(_BULK_CLOSE_CANCEL[option]).click()
