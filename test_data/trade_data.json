@@ -10,6 +10,9 @@
     "expiry_specified_date": "Specified Date",
     "expiry_specified_date_and_time": "Specified Date and Time",
 
+    "expiry_date": "2026-03-31",
+    "expiry_time": "03:26",
+
     "volume": "1",
     "limit_price": "1.17500",
     "stop_price": "1.16500",

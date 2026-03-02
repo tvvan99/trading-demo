@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime
 
 from selenium.webdriver.common.by import By
 
@@ -62,6 +63,54 @@ class LimitOrderForm(_OrderForm):
         self.wait_for_element_clickable(
             (By.XPATH, f'//*[normalize-space(text())="{value}"]')
         ).click()
+
+    def enter_expiry_date(self, value: str):
+        """value: date string, e.g. '2026-03-03'"""
+        target = datetime.strptime(value, "%Y-%m-%d")
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_DATE_INPUT).click()
+        self._navigate_calendar_to(target)
+        aria_label = f"{target.strftime('%B')} {target.day}, {target.year}"
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//abbr[@aria-label="{aria_label}"]')
+        ).click()
+
+    def _navigate_calendar_to(self, target: datetime):
+        _MONTHS = {
+            "January": 1, "February": 2, "March": 3, "April": 4,
+            "May": 5, "June": 6, "July": 7, "August": 8,
+            "September": 9, "October": 10, "November": 11, "December": 12,
+        }
+        while True:
+            parts = self.wait_for_element(TradeLocators.EXPIRY_CALENDAR_LABEL).text.strip().split()
+            cur_month, cur_year = _MONTHS[parts[0]], int(parts[1])
+            if cur_year == target.year and cur_month == target.month:
+                break
+            if cur_year < target.year:
+                self.wait_for_element_clickable(TradeLocators.EXPIRY_CALENDAR_NEXT_YEAR).click()
+            elif cur_year > target.year:
+                self.wait_for_element_clickable(TradeLocators.EXPIRY_CALENDAR_PREV_YEAR).click()
+            elif cur_month < target.month:
+                self.wait_for_element_clickable(TradeLocators.EXPIRY_CALENDAR_NEXT_MONTH).click()
+            else:
+                self.wait_for_element_clickable(TradeLocators.EXPIRY_CALENDAR_PREV_MONTH).click()
+
+    def enter_expiry_time(self, value: str):
+        """value: time string, e.g. '03:26'"""
+        hour, minute = value.split(":")
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_TIME_INPUT).click()
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_TIME_HOUR_TRIGGER).click()
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//div[@data-testid="options"]//div[normalize-space(text())="{hour}"]')
+        ).click()
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_TIME_MINUTE_TRIGGER).click()
+        self.wait_for_element_clickable(
+            (By.XPATH, f'//div[@data-testid="options"]//div[normalize-space(text())="{minute}"]')
+        ).click()
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_TIME_OK).click()
+
+    def clear_expiry_time(self):
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_TIME_INPUT).click()
+        self.wait_for_element_clickable(TradeLocators.EXPIRY_TIME_CLEAR).click()
 
     def select_fill_policy(self, value: str):
         self._select_fill_policy(value)

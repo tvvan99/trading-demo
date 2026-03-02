@@ -45,7 +45,9 @@ def test_stop_order(logged_in_driver, trade_data):
 
     form.enter_volume(trade_data["volume"])
     form.enter_price(trade_data["stop_price"])
-    form.select_expiry(trade_data["expiry_good_till_day"])
+    form.select_expiry(trade_data["expiry_specified_date_and_time"])
+    form.enter_expiry_date(trade_data["expiry_date"])
+    form.enter_expiry_time(trade_data["expiry_time"])
     form.select_fill_policy(trade_data["fill_policy_limit_stop"])
     page.enter_stoploss_points(trade_data["stoploss_points"])
     page.enter_takeprofit_points(trade_data["takeprofit_points"])

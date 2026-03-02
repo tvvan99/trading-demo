@@ -22,6 +22,24 @@ class TradeLocators:
     # Options: "Good Till Canceled", "Good Till Day", "Specified Date", "Specified Date and Time"
     EXPIRY_DROPDOWN        = (By.CSS_SELECTOR, '[data-testid="trade-dropdown-expiry"]')
 
+    # Expiry date/time inputs (visible for "Specified Date" and "Specified Date and Time" only)
+    EXPIRY_DATE_INPUT      = (By.CSS_SELECTOR, '[data-testid="trade-input-expiry-date"]')
+    EXPIRY_TIME_INPUT      = (By.CSS_SELECTOR, '[data-testid="trade-input-expiry-time"]')
+
+    # react-calendar navigation (shared by both date pickers)
+    EXPIRY_CALENDAR_LABEL      = (By.CSS_SELECTOR, '.react-calendar__navigation__label')
+    EXPIRY_CALENDAR_PREV_YEAR  = (By.CSS_SELECTOR, '.react-calendar__navigation__prev2-button')
+    EXPIRY_CALENDAR_PREV_MONTH = (By.CSS_SELECTOR, '.react-calendar__navigation__prev-button')
+    EXPIRY_CALENDAR_NEXT_MONTH = (By.CSS_SELECTOR, '.react-calendar__navigation__next-button')
+    EXPIRY_CALENDAR_NEXT_YEAR  = (By.CSS_SELECTOR, '.react-calendar__navigation__next2-button')
+
+    # Time picker — Hour/Minute custom dropdowns + OK button
+    EXPIRY_TIME_HOUR_TRIGGER   = (By.XPATH, '//div[text()="Hour"]/following-sibling::div')
+    EXPIRY_TIME_MINUTE_TRIGGER = (By.XPATH, '//div[text()="Minute"]/following-sibling::div')
+    EXPIRY_TIME_OPTIONS        = (By.CSS_SELECTOR, '[data-testid="options"]')
+    EXPIRY_TIME_OK             = (By.XPATH, '//button[normalize-space(text())="OK"]')
+    EXPIRY_TIME_CLEAR          = (By.XPATH, '//button[normalize-space(text())="Clear"]')
+
     # Stop Loss (common across all order types)
     STOPLOSS_INPUT        = (By.CSS_SELECTOR, '[data-testid="trade-input-stoploss-price"]')
     STOPLOSS_POINTS_INPUT = (By.CSS_SELECTOR, '[data-testid="trade-input-stoploss-points"]')
